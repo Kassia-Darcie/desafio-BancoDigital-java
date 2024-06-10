@@ -4,13 +4,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ContaPoupanca extends Conta{
-	private static int SEQUENTIAL = 1;	
 	private int diasParaResgate = 1;
 	private double taxaDeJuros = 0.05;
 
-	public ContaPoupanca() {
-		super(2, SEQUENTIAL++);		
+	public ContaPoupanca(int agencia, Client client) {
+		super(agencia, SEQUENTIAL++);
+		this.client = client;
 	}
+	
+
+	@Override
+	public double getSaldo() {
+		return super.getSaldo() + getSaldo() * taxaDeJuros;
+	}
+
 
 	@Override
 	public void sacar(double valor) {
