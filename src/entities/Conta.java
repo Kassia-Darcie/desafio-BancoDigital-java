@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.Objects;
 
 public abstract class Conta {
+	protected static int SEQUENTIAL = 1;
 	private int agencia;
 	private int numero;
 	private double saldo = 0.0;
@@ -17,6 +18,14 @@ public abstract class Conta {
 		this.numero = numero;		
 		this.dataDeCriacao = Instant.now();
 	}
+	
+	
+
+	public double getSaldo() {
+		return saldo;
+	}
+
+
 
 	public int getAgencia() {
 		return agencia;
@@ -75,9 +84,7 @@ public abstract class Conta {
 		builder.append(", saldo=");
 		builder.append(saldo);
 		builder.append(", client=");
-		builder.append(client);
-		builder.append(", dataDeCriacao=");
-		builder.append(dataDeCriacao);
+		builder.append(client.getNome());
 		builder.append("]");
 		return builder.toString();
 	}
