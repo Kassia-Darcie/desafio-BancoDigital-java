@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Client {
 	private String nome;
@@ -38,6 +39,12 @@ public class Client {
 	public void setContaCorrente(Conta contaCorrente) {
 		this.contaCorrente = contaCorrente;
 	}
+	
+	
+
+	public void setContaPoupanca(Conta contaPoupanca) {
+		this.contaPoupanca = contaPoupanca;
+	}
 
 	public long getCpf() {
 		return cpf;
@@ -48,12 +55,23 @@ public class Client {
 		return contaPoupanca;
 	}
 
-	public void abrirContaPoupança() {
-		if (contaPoupanca == null) {
-			this.contaPoupanca = new ContaPoupanca();
-		} else {
-			throw new RuntimeException("Já existe uma conta poupança");
-		}
+	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cpf);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Client other = (Client) obj;
+		return cpf == other.cpf;
 	}
 
 	@Override
