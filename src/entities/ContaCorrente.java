@@ -7,6 +7,11 @@ public class ContaCorrente extends Conta {
 		super(agencia, SEQUENTIAL++);
 		this.client = client;
 	}
+	
+	public void tranferir(double valor, Conta contaDestino) {
+		sacar(valor);
+		contaDestino.depositar(valor);
+	}
 
 	@Override
 	public void imprimirExtrato() {
