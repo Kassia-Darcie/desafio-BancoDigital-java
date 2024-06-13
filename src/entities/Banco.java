@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-public class Banco {
+public class Banco  {
 	private String nome;
 	private int agencia;
 	private Set<Conta> contas = new HashSet<>();
@@ -29,13 +29,24 @@ public class Banco {
 	public Set<Conta> getContas() {
 		return contas;
 	}
-
-
-	public void abrirConta(String nome, long cpf, LocalDate dataDeNascimento) {
+	
+	private Client cadastrarCliente(String nome, long cpf, LocalDate dataDeNascimento) throws RuntimeException {
 		Client client = new Client(nome, cpf, dataDeNascimento);
-		Conta conta = new ContaCorrente(agencia, client);
-		client.setContaCorrente(conta);
-		contas.add(conta);
+		List<Long> cpfsCadastradosList = obterListadeClientes().stream()
+				.map(c -> c.getCpf())
+				.toList();
+		if (cpfsCadastradosList.contains(cpf)) {
+			throw new RuntimeException("CPF já cadastrado");
+		}
+		return client;
+	}
+
+
+	public void abrirConta(String nome, long cpf, LocalDate dataDeNascimento) throws RuntimeException {
+			Client client = cadastrarCliente(nome, cpf, dataDeNascimento);
+			Conta conta = new ContaCorrente(agencia, client);
+			client.setContaCorrente(conta);
+			contas.add(conta);
 	}
 	
 	public void abrirContaPoupanca(long cpf) {
