@@ -72,6 +72,19 @@ public class Banco  {
 		Optional<Client> client = obterListadeClientes().stream()
 				.filter(c -> c.getCpf() == cpf)
 				.findFirst();
-		return client.orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+		return client.orElseThrow(() -> new RuntimeException("Cliente não encontrado."));
+	}
+	
+	public Conta buscarConta(int agencia, int numero) {
+		Optional<Conta> conta = contas.stream().filter(c -> c.getAgencia() == agencia && c.getNumero() == numero)
+				.findFirst();
+		return conta.orElseThrow(() -> new RuntimeException("Conta não encontrada."));
+	}
+	
+	public void transferirEntreContas(double valor, long cpf, int agenciaDestino, int numeroDestino) {
+		ContaCorrente remetente = (ContaCorrente) buscarClientePeloCpf(cpf).getContaCorrente(); 
+		Conta destino = buscarConta(agenciaDestino, numeroDestino);
+		remetente.transferir(valor, destino);
+		
 	}
 }
