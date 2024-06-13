@@ -8,4 +8,12 @@ public class ContaCorrente extends Conta {
 		this.client = client;
 	}
 
+	@Override
+	public void imprimirExtrato() {
+		System.out.println("==== Extrato Conta Corrente ====");
+		super.imprimirExtrato();
+	}
+	
+	
+
 }

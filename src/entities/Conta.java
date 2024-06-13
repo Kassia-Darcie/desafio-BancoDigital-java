@@ -55,7 +55,12 @@ public abstract class Conta {
 		}
 	}
 	
-	
+	public void imprimirExtrato() {
+		System.out.println("Titular: " + client.getNome());
+		System.out.println("Agência: " + agencia);
+		System.out.println("Número da conta: " + numero);
+		System.out.printf("Saldo: R$  + %.2f\n", saldo);
+	}
 
 	@Override
 	public int hashCode() {
