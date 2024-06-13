@@ -59,7 +59,7 @@ public abstract class Conta {
 		System.out.println("Titular: " + client.getNome());
 		System.out.println("Agência: " + agencia);
 		System.out.println("Número da conta: " + numero);
-		System.out.printf("Saldo: R$  + %.2f\n", saldo);
+		System.out.printf("Saldo: R$ %.2f\n", saldo);
 	}
 
 	@Override

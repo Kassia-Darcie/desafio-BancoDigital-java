@@ -8,7 +8,7 @@ public class ContaCorrente extends Conta {
 		this.client = client;
 	}
 	
-	public void tranferir(double valor, Conta contaDestino) {
+	public void transferir(double valor, Conta contaDestino) {
 		sacar(valor);
 		contaDestino.depositar(valor);
 	}
